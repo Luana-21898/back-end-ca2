@@ -13,10 +13,13 @@ class MusicInsts extends React.Component {
         return (
             <div>
                 <p>
-                    This is the MusicInsts component.
+                    This is the Musical Instrument's component.
+                </p>
+                <p>
                     This component should contain a list of musical instruments using a table tag or
                     perhaps components.
                 </p>
+
                 <h4>Here is an example of each</h4>
                 <h5>#1 Table</h5>
                 <table>

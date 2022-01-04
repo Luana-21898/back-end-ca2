@@ -52,3 +52,5 @@ class MusicInstAdd extends React.Component {
         )
     }
 }
+
+export default MusicInstAdd
