@@ -43,7 +43,7 @@ class MusicInsts extends React.Component{
 
     render(){
         //assign variables using the state
-        const { isLoaded, error, musicinsts} = this.state;
+        const { isLoaded, musicinsts} = this.state;
         
         //conditional rendering: https://reactjs.org/docs/conditional-rendering.html
         //if we are waiting for our server to serve us the data render this part of code
@@ -59,7 +59,7 @@ class MusicInsts extends React.Component{
                     <table>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Id</th>
                             <th>Type</th>
                             <th>Brand</th>
                             <th>Price</th>
