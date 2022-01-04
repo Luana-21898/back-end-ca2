@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 // defining the actual app to handle the requests (e.g. push, get, etc.)
 const app = express()
-const port = 3000
+const port = 3001
 // require the driver to connect to the database
 const mongoose = require('mongoose')
 // require the class constructor from different file

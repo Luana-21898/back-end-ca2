@@ -1,90 +1,91 @@
 //component to view all musical instruments
 
 import React from "react";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import axios from 'axios';
 
-class MusicInsts extends React.Component {
-    constructor(props) {
+class MusicInsts extends React.Component{
+    constructor(props){
         super(props);
-
+        this.state = {
+          musicinsts: [],
+          isLoaded: true
+        }
+     
     }
 
-    render() {
-        return (
-            <div>
-                <p>
-                    This is the Musical Instrument's component.
-                </p>
-                <p>
-                    This component should contain a list of musical instruments using a table tag or
-                    perhaps components.
-                </p>
+    componentDidMount(){
 
-                <h4>Here is an example of each</h4>
-                <h5>#1 Table</h5>
-                <table>
-                    <tr>
-                        <th>Id</th>
-                        <th>Type</th>
-                        <th>Brand</th>
-                        <th>Price</th>
-                        <th>Condition</th>
-                        <th>isAvailable</th>
-                    </tr>
-                    {/* this part can and should be generated using a for loop */}
-                    <tr>
-                        <td>61a41dabca2ff287ec850707</td>
-                        <td>String</td>
-                        <td>Jackson</td>
-                        <td>2000</td>
-                        <td>New</td>
-                        <td>False</td>
-                        {/* link to view a single musical instrument's details by ID  */}
-                        <td><Link to='/viewMusicInst?id=61a41dabca2ff287ec850707'>View</Link></td>
-                        {/* link to view and edit the musical instrument's details by ID */}
-                        <td><Link to='/editMusicInst?id=61a41dabca2ff287ec850707'>Edit</Link></td>
-                        <td>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>61d3a3b6dc2a199ff209f52c</td>
-                        <td>Ukele</td>
-                        <td>Fender</td>
-                        <td>2000</td>
-                        <td>New</td>
-                        <td>True</td>
-                        {/* link to view a single musical instrument's details by ID  */}
-                        <td><Link to='/viewMusicInst?id=61d3a3b6dc2a199ff209f52c'>View</Link></td>
-                        {/* link to view and edit the musical instrument's details by ID */}
-                        <td><Link to='/editMusicInst?id=61d3a3b6dc2a199ff209f52c'>Edit</Link></td>
-                        <td>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>61d3b099b7bd5f44857d10b0</td>
-                        <td>Flute</td>
-                        <td>Candy</td>
-                        <td>2000</td>
-                        <td>New</td>
-                        <td>True</td>
-                        {/* link to view a single musical instrument's details by ID  */}
-                        <td><Link to='/viewMusicInst?id=61d3b099b7bd5f44857d10b0'>View</Link></td>
-                        {/* link to view and edit the musical instrument's details by ID */}
-                        <td><Link to='/editMusicInst?id=61d3b099b7bd5f44857d10b0'>Edit</Link></td>
-                        <td>
-                            <a to="/delete/id">Delete</a>
-                        </td>
-                    </tr>
-                </table>
-                {/* insert html code here */}
-                <h5>#2  Components</h5>
-                {/* insert JSX code here */}
-            </div>
-        )
+        axios.get('/musicalinst')
+            .then((response) => {
+            // handle success when status is 200 and OK
+            // populate the musical instruments` array with the data from the server
+            // set isLoaded to true to make sure we render the right values on screen
+                this.setState( {
+                    musicinsts: response.data,
+                    isLoaded: true
+                })
+                
+            })
+            .catch((error)=> {
+            // handle error 
+            // in case we get an error from the server, e.g. the server is offline
+                this.setState({
+                    isLoaded:false,
+                    error
+                })
+                
+            })
+       
+           
+    }
+
+
+    render(){
+        //assign variables using the state
+        const { isLoaded, error, musicinsts} = this.state;
+        
+        //conditional rendering: https://reactjs.org/docs/conditional-rendering.html
+        //if we are waiting for our server to serve us the data render this part of code
+        // also render this if the SERVER is offline
+        if(!isLoaded){
+            return(
+                <div>The page is loading or the SERVER is down...</div>
+            )
+        //render this part of code if we received the data from the server
+        } else {
+            return(
+                <div>
+                    <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Type</th>
+                            <th>Brand</th>
+                            <th>Price</th>
+                            <th>Condition</th>
+                            <th>Availability</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {musicinsts.map(musicalinst => (
+                        <tr key={musicalinst._id}>
+                            <td>{musicalinst._id}</td>
+                            <td>{musicalinst.type}</td>
+                            <td >{musicalinst.brand}</td>
+                            <td >{musicalinst.price}</td>
+                            <td >{musicalinst.condition}</td>
+                            <td >{musicalinst.isAvailable? 'Yes' : 'No'}</td>
+                        </tr>
+                    ))}
+                    </tbody> 
+                    </table>
+              </div>  
+            )
+        }
     }
 }
-
+    
 
 export default MusicInsts;
