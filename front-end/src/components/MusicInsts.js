@@ -71,7 +71,7 @@ class MusicInsts extends React.Component {
                         {/* link to view and edit the musical instrument's details by ID */}
                         <td><Link to='/editMusicInst?id=61d3b099b7bd5f44857d10b0'>Edit</Link></td>
                         <td>
-                            <button>Delete</button>
+                            <a to="/delete/id">Delete</a>
                         </td>
                     </tr>
                 </table>
