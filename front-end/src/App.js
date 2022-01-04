@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+
 import './App.css';
+import MusicInsts from './components/MusicInsts';
+import MusicInstEdit from './components/MusicInstEdit';
+import MusicInstView from './components/MusicInstView';
+import MusicInstAdd from './components/MusicInstAdd';
+import {
+  Routes,
+  Route,
+  Link
+
+} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* all your routes should be implemented here */}
+      <Routes>
+        <Route path='/' element={<MusicInsts />} />
+        <Route path='/editMusicInst' element={<MusicInstEdit />} />
+        <Route path='/viewMusicInst' element={<MusicInstView />} />
+        <Route path='/addMusicInst' element={<MusicInstAdd />} />
+      </Routes>
     </div>
   );
 }
