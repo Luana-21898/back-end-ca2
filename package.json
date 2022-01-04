@@ -1,0 +1,23 @@
+{
+  "name": "back-end-ca2",
+  "version": "1.0.0",
+  "description": "CA2-Template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luana-21898/back-end-ca2.git"
+  },
+  "author": "Luana França",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luana-21898/back-end-ca2/issues"
+  },
+  "homepage": "https://github.com/Luana-21898/back-end-ca2#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.4"
+  }
+}
